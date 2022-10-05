@@ -32,6 +32,7 @@ public:
   double to_double() const;
   /// return a (nice) string representation, and optionally show the sign
   std::string str(bool sign = false) const;
+  std::string str_age() const;
   /// return a string representation
   std::string repr() const;
   /// return a LaTeX representation

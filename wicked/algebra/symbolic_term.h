@@ -47,8 +47,12 @@ public:
   bool normal_ordered() const { return normal_ordered_; }
 
   /// Return the SQ operators
+  std::vector<SQOperator> &ops() { return operators_; }
+  /// Return the SQ operators
   const std::vector<SQOperator> &ops() const { return operators_; }
 
+  /// Return the tensors
+  std::vector<Tensor> &tensors() { return tensors_; }
   /// Return the tensors
   const std::vector<Tensor> &tensors() const { return tensors_; }
 
@@ -71,6 +75,9 @@ public:
 
   /// Return a string representation
   std::string str() const;
+
+  /// Return an ORCA-AGE string representation
+  std::string str_age() const;
 
   /// Return a LaTeX representation
   std::string latex() const;

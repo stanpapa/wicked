@@ -113,6 +113,18 @@ std::string OrbitalSpaceInfo::str() const {
 
 char OrbitalSpaceInfo::label(int pos) const { return space_info_[pos].label(); }
 
+char OrbitalSpaceInfo::label_age(int pos, const bool& is_summed) const { 
+  auto space = space_info_[pos];
+  if (space.indices().empty()) {
+    throw std::runtime_error("label_age: indices list is empty.");
+  }
+  
+  auto label = space.indices()[0].c_str()[0];
+  if (is_summed) label = static_cast<char>(std::toupper(label));
+  
+  return label; 
+}
+
 const std::string OrbitalSpaceInfo::index_label(int pos, int idx) const {
   const std::vector<std::string> &index_labels = indices(pos);
   if (idx < index_labels.size()) {

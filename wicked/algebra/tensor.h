@@ -23,12 +23,19 @@ public:
 
   // ==> Class public interface <==
 
+  /// Change label
+  void label_mut(const std::string &label) { label_ = label; };
+
   /// Return a reference to the label
   const std::string &label() const { return label_; }
 
   /// Return a reference to the lower indices
+  std::vector<Index> &lower_mut() { return lower_; }
+  /// Return a reference to the lower indices
   const std::vector<Index> &lower() const { return lower_; }
 
+  /// Return a reference to the upper indices
+  std::vector<Index> &upper_mut() { return upper_; }
   /// Return a reference to the upper indices
   const std::vector<Index> &upper() const { return upper_; }
 
@@ -67,6 +74,9 @@ public:
 
   /// Return a string representation
   std::string str() const;
+
+  /// Return an AGE string representation
+  std::string str_age() const;
 
   /// Return a LaTeX representation
   std::string latex() const;

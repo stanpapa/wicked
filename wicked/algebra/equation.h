@@ -26,11 +26,21 @@ public:
   /// Return the right-hand side of the equation
   Expression rhs_expression() const;
 
+  /// flag indices that are summed
+  void set_summation_indices();
+
+  /// expand antisymmetrised integrals <pq||rs> to
+  /// Mulliken notation -> (pr|qs) - (ps|qr)
+  std::vector<Equation> expand_integrals_to_mulliken();
+  
   /// Comparison operator
   bool operator==(Equation const &other) const;
 
   /// Return a string representation
   std::string str() const;
+
+  /// Return an ORCA-AGE string representation
+  std::string str_age() const;
 
   /// Return a LaTeX representation
   std::string latex() const;

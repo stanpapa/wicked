@@ -35,6 +35,10 @@ public:
 
   /// @return the position within a space
   int pos() const { return index_.second; }
+  
+  /// Switch summation index if it doesn't
+  /// match the current flag
+  void is_summed(const bool& is_summed);
 
   /// Comparison operator
   /// @return true if other index is equal to this
@@ -47,6 +51,11 @@ public:
   /// @return a string representation
   /// (e.g., for index 1 of space 'o' returns 'o1')
   std::string str() const;
+
+  /// @return a string representation
+  /// (e.g., for index 1 of space 'o' returns 'i1')
+  /// if an index is summed, it's capitalised
+  std::string str_age() const;
 
   /// @return a LaTeX representation
   /// This function either returns a pretty index (e.g., 'i')
@@ -61,6 +70,10 @@ private:
 
   /// Store the orbital space type and position in the space (space,p)
   std::pair<int, int> index_;
+  
+  /// Flag to indicate if an index is a summation index
+  /// Only necessary for printing ORCA-AGE equations
+  bool is_summed_ = false; // flag
 };
 
 // A Index -> Index map used for reindexing

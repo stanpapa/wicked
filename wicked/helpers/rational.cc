@@ -1,5 +1,7 @@
 #include <numeric>
 #include <regex>
+#include <sstream>
+#include <iomanip>
 
 #if USE_BOOST_RATIONAL
 #include "boost/lexical_cast.hpp"
@@ -99,6 +101,21 @@ std::string rational::str(bool sign) const {
     }
   }
   return s;
+}
+
+std::string rational::str_age() const {
+  double r;
+
+  // todo: check correctness of boost implementation
+#if USE_BOOST_RATIONAL
+  r = boost::numeric_cast<double>(numerator_) / boost::numeric_cast<double>(denominator_);
+#else
+  r = (double)numerator_ / (double)denominator_;
+#endif
+
+  std::stringstream ss;
+  ss << std::fixed << std::setprecision(16) << r; 
+  return ss.str();
 }
 
 std::string rational::repr() const {

@@ -15,6 +15,7 @@ FieldType SQOperator::field_type() const {
   return orbital_subspaces->field_type(space());
 }
 
+Index SQOperator::index_mut() { return operator_.second; }
 Index SQOperator::index() const { return operator_.second; }
 
 int SQOperator::space() const { return operator_.second.space(); }

@@ -276,6 +276,25 @@ std::string SymbolicTerm::str() const {
   return (join(str_vec, " "));
 }
 
+std::string SymbolicTerm::str_age() const {
+  std::vector<std::string> str_vec;
+  for (const Tensor &tensor : tensors_) {
+    str_vec.push_back(tensor.str_age());
+  }
+  // todo: introduce SQOperator::str_age()
+  if (nops()) {
+    if (normal_ordered())
+      str_vec.push_back("{");
+    for (const auto &op : operators_) {
+      str_vec.push_back(op.str());
+    }
+    if (normal_ordered())
+      str_vec.push_back("}");
+  }
+
+  return (join(str_vec, " "));
+}
+
 std::string SymbolicTerm::latex() const {
   std::vector<std::string> str_vec;
   for (const Tensor &tensor : tensors_) {

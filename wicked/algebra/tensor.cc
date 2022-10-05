@@ -102,6 +102,47 @@ std::string Tensor::str() const {
           join(str_vec_lower, ",") + "}");
 }
 
+std::string Tensor::str_age() const {
+  std::vector<Index> indices;
+  std::vector<std::string> indices_str;
+
+  // keep upper upper ... lower lower ... for 2e integral
+  if (label_ == "V" || label_ == "I") {
+    for (const auto& idx : upper_) indices.push_back(idx);
+    for (const auto& idx : lower_) indices.push_back(idx);
+  } else {
+    for (int i = 0; i < upper_.size(); i++) {
+      indices.push_back(lower_[i]);
+      indices.push_back(upper_[i]);
+    }
+  }
+
+  // adjust labels for amplitudes
+  // S(i,a) -> Sia
+  // T(i,a,j,b) -> Tijab
+  // etc
+  // todo: fix for active indices and make distinction betwwen upper and lower indices
+  std::string label = label_;
+  if (label_ == "T" || label_ == "S" || label_ == "L") {
+    // count number of indices per space
+    int n_occ = std::count_if(indices.begin(),
+                  indices.end(),
+                  [](Index i) { return i.space() == static_cast<int>(SpaceType::Occupied); });
+    int n_vir = std::count_if(indices.begin(),
+                  indices.end(),
+                  [](Index i) { return i.space() == static_cast<int>(SpaceType::Unoccupied); });
+    // int n_act = std::count_if(indices.begin(),
+    //               indices.end(),
+    //               [](Index i) { return i.space() == static_cast<int>(SpaceType::General); });
+    for (int i = 0; i < n_occ; i++) label.push_back(orbital_subspaces->indices(static_cast<int>(SpaceType::Occupied))[i].c_str()[0]);
+    for (int i = 0; i < n_vir; i++) label.push_back(orbital_subspaces->indices(static_cast<int>(SpaceType::Unoccupied))[i].c_str()[0]);
+  }
+  
+  for (const auto& idx : indices) indices_str.push_back(idx.str_age());
+  
+  return label + "(" + join(indices_str, ",") + ")";
+}
+
 std::string Tensor::latex() const {
   std::vector<std::string> str_vec_upper;
   std::vector<std::string> str_vec_lower;

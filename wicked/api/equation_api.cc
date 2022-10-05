@@ -16,6 +16,7 @@ void export_Equation(py::module &m) {
       .def("rhs_expression", &Equation::rhs_expression)
       .def("__repr__", &Equation::str)
       .def("__str__", &Equation::str)
+      .def("age", &Equation::str_age)
       .def("latex", &Equation::latex)
       .def("compile", &Equation::compile);
 }

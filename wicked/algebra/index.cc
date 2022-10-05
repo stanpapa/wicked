@@ -9,6 +9,10 @@ Index::Index() : index_(std::make_pair(-1, -1)) {}
 
 Index::Index(int space, int p) : index_(std::make_pair(space, p)) {}
 
+void Index::is_summed(const bool& is_summed) {
+  is_summed_ = is_summed;
+}
+
 bool Index::operator==(Index const &other) const {
   return index_ == other.index_;
 }
@@ -19,6 +23,10 @@ bool Index::operator<(Index const &other) const {
 
 std::string Index::str() const {
   return orbital_subspaces->label(space()) + std::to_string(pos());
+}
+
+std::string Index::str_age() const {
+  return orbital_subspaces->label_age(space(), is_summed_) + std::to_string(pos());
 }
 
 std::string Index::latex() const {

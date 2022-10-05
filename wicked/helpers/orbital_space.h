@@ -60,6 +60,9 @@ public:
   /// The label of an orbital space
   char label(int pos) const;
 
+  /// The label of an ORCA-AGE orbital space
+  char label_age(int pos, const bool& is_summed) const;
+
   /// The label of an index that belongs to a given orbital space
   const std::string index_label(int pos, int idx) const;
 

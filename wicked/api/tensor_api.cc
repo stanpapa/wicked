@@ -18,6 +18,7 @@ void export_Tensor(py::module &m) {
                     const std::vector<Index> &, SymmetryType>())
       .def("__repr__", &Tensor::str)
       .def("__str__", &Tensor::str)
+      .def("age", &Tensor::str_age)
       .def("label", &Tensor::label)
       .def("lower", &Tensor::lower)
       .def("upper", &Tensor::upper)

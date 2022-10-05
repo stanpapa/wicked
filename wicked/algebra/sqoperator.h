@@ -35,6 +35,9 @@ public:
   FieldType field_type() const;
 
   /// Return the index of this operator
+  Index index_mut();
+
+  /// Return the index of this operator
   Index index() const;
 
   /// Return the index of this operator
